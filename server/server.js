@@ -16,6 +16,16 @@ app.get('/', (req, res) => {
 app.get('/anime', (req,res) => {
     res.json(anime);
 })
+app.get('/anime/:id', (req,res) => {
+  const animeId = parseInt(req.params.id);
+  const selectedAnime =anime.find(anime => anime.id === animeId);
+  if(selectedAnime){
+    res.json(selectedAnime);
+  }
+  else{
+    res.status(404).json({message: 'Anime not found'});
+  }
+})
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`)
